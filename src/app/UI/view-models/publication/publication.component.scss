@@ -1,0 +1,18 @@
+.template-publication {
+    margin-bottom: 2rem;
+    margin-top: 5rem;
+    max-width: 738px;
+}
+
+.scroll-container{
+    height: 100vh;
+    overflow: scroll;
+}
+
+@media (max-width: 767px) {
+
+    .template-publication {
+        max-width: 90vw;
+        min-width: 395px;
+    }
+}

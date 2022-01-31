@@ -1,0 +1,32 @@
+.menu-navbar {
+    background: #FFFFFF;
+    top: 0;
+    padding: 1.25rem;
+    height: 64px;
+    z-index: 1;
+    position: fixed;
+    border-radius: 0px 0px 15px 15px;
+    width: 100vw;
+    text-align: center;
+    box-shadow: 0px 8px 16px rgb(110 120 130 / 12%);
+
+    &__title {
+        color: #2E2E2E;
+        font-weight: bold;
+    }
+
+    &__button-menu {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+    }
+}
+
+@media (min-width: 767px) {
+
+    .menu-navbar {
+        &__button-menu{
+            visibility: hidden;
+        }
+    }
+}

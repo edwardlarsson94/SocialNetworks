@@ -1,0 +1,18 @@
+<div id="publication-template" class="scroll-container">
+    <div class="grid-container template-publication">
+        <div class="grid-x">
+            <div class="cell">
+                <app-state></app-state>
+            </div>
+            <div 
+            *ngFor="let elmentPublications of publications"
+            class="cell">
+                <app-comments
+                [comment]="elmentPublications"
+                ></app-comments>
+            </div>
+        </div>
+    </div>
+</div>
+
+

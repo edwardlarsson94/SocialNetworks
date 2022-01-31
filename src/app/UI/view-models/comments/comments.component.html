@@ -1,0 +1,125 @@
+<div class="container-principal">
+    
+    <div class="container-post">
+        <div class="grid-x margin-bottom-1">
+            <div class="cell small-1 container-post__box-image-profile">
+                <img class="container-post__image-profile" src="{{comment.userImg}}" alt="">
+            </div>
+            <div class="cell small-11">
+                <div class="container-post__name-profile">
+                    {{ comment.userName }}
+                </div>
+                <p class="container-post__time">
+                    {{ comment.date.dateMap }}
+                </p>
+                <p class="container-post__comments">
+                    {{ comment.content }}
+                </p>
+            </div>
+
+            <div class="cell small-6 container-post__like-post">
+
+                <ng-container *ngIf="totalReactions > 0; else elseTemplateZeroLikes">
+                    <div *ngFor="let userReaction of comment.react | slice:0:3;" class="container-post__image-reaction">
+                        <img class="container-post__image-reaction-content" src="{{ userReaction.userImg }}" alt="">
+                    </div>
+			        <span class="container-post__amount-like">
+		                 {{ totalReactions }} likes
+		            </span>
+                </ng-container>
+                <ng-template #elseTemplateZeroLikes>
+                    No tienes likes
+                </ng-template>
+            </div>
+
+            <div 
+            *ngIf="totalComments > 0"
+            class="cell small-6 text-right container-post__comment-post"
+            (click) = "toggleAllComments()"
+            >
+                {{ totalComments }} comentarios
+            </div>
+        </div>
+        <div class="grid-x container-post__container-reaction">
+            <div class="cell small-6 container-post__text-reaction">
+                <button (click)="showReactions()">
+                    <ng-container *ngIf="selfReaction; else elseTemplate">
+                        <img src="{{ selfReaction.img }}" alt="">
+                        <span class="container-post__item-text-reaction"> {{ selfReaction.name }} </span>
+                    </ng-container>
+                    <ng-template #elseTemplate>
+                        Reaccionar
+                    </ng-template>
+                </button>
+                <div *ngIf="isVisible" class="container-post__text-reaction__icons-reaction">
+                    <button (click)="processReactions('like')">
+                        <img src="../../../../assets/images/publicatios/like.svg" alt="">
+                    </button>
+                    <button (click)="processReactions('happy')">
+                        <img src="../../../../assets/images/publicatios/happy.svg" alt="">
+                    </button>
+                    <button (click)="processReactions('love')">
+                        <img src="../../../../assets/images/publicatios/love.svg" alt="">
+                    </button>
+                    <button (click)="processReactions('crying')">
+                        <img src="../../../../assets/images/publicatios/crying.svg" alt="">
+                    </button>
+                    <button (click)="processReactions('sad')">
+                        <img src="../../../../assets/images/publicatios/sad.svg" alt="">
+                    </button>
+                    <button (click)="processReactions('boring')">
+                        <img src="../../../../assets/images/publicatios/boring.svg" alt="">
+                    </button>
+                </div>
+            </div>
+            <div class="cell small-6 text-right container-post__text-reaction">
+                <button (click)="toggleNewCommentResponse()">
+                    Comentar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div [ngClass]="{'container-comment' : isShowAllComments, 
+        'container-comment-hidden' : !isShowAllComments}" class="content-comments">
+        <ng-container *ngIf="isShowAllComments">
+            <div *ngFor="let commentResponse of comment.comments" 
+            class="grid-x margin-bottom-1">
+                <div class="cell small-2 medium-1">
+                    <img class="content-comments__image-profile" src="{{ commentResponse.userImg }}" alt="">
+                </div>
+                <div class="cell small-10 medium-11 container-comment__texts">
+                    <div class="container-comment__name-profile">
+                        {{ commentResponse.userName }}
+                    </div>
+                    <p class="container-comment__comments">
+                        {{ commentResponse.content }}
+                    </p>
+                    <p class="container-comment__time">
+                        {{ commentResponse.date.dateMap }}
+                    </p>
+                </div>
+           </div>
+        </ng-container>
+    </div>
+
+    <div  [ngClass]="{'container-box' : isShowAddCommentResponse, 
+    'container-box-hidden' : !isShowAddCommentResponse}" class="content-publish">
+        <ng-container *ngIf="isShowAddCommentResponse">
+            <div class="container-box__container-publish">
+                <input type="text" 
+                       class="container-box__publish"
+                       placeholder="Escribe un comentario"
+                       [(ngModel)]="inputCommentResponse">
+            </div>
+            <div class="text-center margin-top-1">
+                <button 
+                class="container-box__button-publish"
+                (click)="handlerAddNewCommentResponse(comment.id)"
+                >
+                Publicar
+            </button>
+            </div>            
+        </ng-container>
+    </div>
+</div>

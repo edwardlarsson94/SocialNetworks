@@ -1,0 +1,18 @@
+<div class="template-state">
+    <div class="template-state__box-publish">
+        <input type="text" 
+               class="template-state__publish"
+               [ngClass]="{'template-state__publish--border' : isVisible}"
+               placeholder="Escribe Aquí tu estado"
+               [(ngModel)]="inputPublish"
+               (click)="valueChange()"
+               maxlength="255"
+               >
+    </div>
+    <div [ngClass]="{'template-state__template-publish-visible' : isVisible, 
+                'template-state__template-publish' : !isVisible}" class="text-center">
+        <button *ngIf="isVisible" class="template-state__button-publish" (click)="handlerAddPublication()">
+            Publicar
+        </button>
+    </div>
+</div>
